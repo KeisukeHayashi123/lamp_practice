@@ -1,7 +1,9 @@
 <?php
+//関数ファイルの読み込み
 require_once MODEL_PATH . 'functions.php';
+//データベースファイルの読み込み
 require_once MODEL_PATH . 'db.php';
-
+//ユーザーの取得(idによる)
 function get_user($db, $user_id){
   $sql = "
     SELECT
@@ -18,7 +20,7 @@ function get_user($db, $user_id){
 
   return fetch_query($db, $sql);
 }
-
+//ユーザーの取得(名前)
 function get_user_by_name($db, $name){
   $sql = "
     SELECT
@@ -35,16 +37,18 @@ function get_user_by_name($db, $name){
 
   return fetch_query($db, $sql);
 }
-
+//????
 function login_as($db, $name, $password){
+  //get_user_name関数を変数$userに格納
   $user = get_user_by_name($db, $name);
+  //もし変数$userが異なっているかパスワードが違ったらfalseを返す
   if($user === false || $user['password'] !== $password){
     return false;
   }
   set_session('user_id', $user['user_id']);
   return $user;
 }
-
+//
 function get_login_user($db){
   $login_user_id = get_session('user_id');
 
