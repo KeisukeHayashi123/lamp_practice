@@ -1,18 +1,21 @@
 <!DOCTYPE html>
+//商品管理ページ
 <html lang="ja">
 <head>
+  //VIEWファイルの読み込み テンプレートのヘッド画面表示
   <?php include VIEW_PATH . 'templates/head.php'; ?>
   <title>商品管理</title>
   <link rel="stylesheet" href="<?php print (STYLESHEET_PATH . 'admin.css'); ?>">
 </head>
 <body>
+  //VIEWファイルの読み込み　テンプレートのログインされた後の画面ページを表示
   <?php 
   include VIEW_PATH . 'templates/header_logined.php'; 
   ?>
 
   <div class="container">
     <h1>商品管理</h1>
-
+//VIEWファイルの読み込み ようこそ~さんのとこ　テンプレートのメッセージを表示
     <?php include VIEW_PATH . 'templates/messages.php'; ?>
 
     <form 
@@ -65,6 +68,7 @@
             <td><img src="<?php print h(IMAGE_PATH . $item['image']);?>" class="item_image"></td>
             <td><?php print h($item['name']); ?></td>
             <td><?php print h(number_format($item['price'])); ?>円</td>
+
             <td>
               <form method="post" action="admin_change_stock.php">
                 <div class="form-group">
@@ -74,6 +78,7 @@
                 </div>
                 <input type="submit" value="変更" class="btn btn-secondary">
                 <input type="hidden" name="item_id" value="<?php print h($item['item_id']); ?>">
+
               </form>
             </td>
             <td>
@@ -86,11 +91,14 @@
                   <input type="submit" value="非公開 → 公開" class="btn btn-secondary">
                   <input type="hidden" name="changes_to" value="open">
                 <?php } ?>
+
                 <input type="hidden" name="item_id" value="<?php print h($item['item_id']); ?>">
+
               </form>
 
               <form method="post" action="admin_delete_item.php">
                 <input type="submit" value="削除" class="btn btn-danger delete">
+
                 <input type="hidden" name="item_id" value="<?php print h($item['item_id']); ?>">
               </form>
 

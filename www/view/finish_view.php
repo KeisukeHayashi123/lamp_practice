@@ -3,6 +3,7 @@
 <head>
   <?php include VIEW_PATH . 'templates/head.php'; ?>
   <title>ご購入ありがとうございました！</title>
+  //h関数追加
   <link rel="stylesheet" href="<?php print(STYLESHEET_PATH . 'admin.css'); ?>">
 </head>
 <body>
@@ -26,6 +27,7 @@
         <tbody>
           <?php foreach($carts as $cart){ ?>
           <tr>
+
             <td><img src="<?php print h(IMAGE_PATH . $cart['image']);?>" class="item_image"></td>
             <td><?php print h($cart['name']); ?></td>
             <td><?php print h(number_format($cart['price'])); ?>円</td>
@@ -33,10 +35,12 @@
                 <?php print h($cart['amount']); ?>個
             </td>
             <td><?php print h(number_format($cart['price'] * $cart['amount'])); ?>円</td>
+
           </tr>
           <?php } ?>
         </tbody>
       </table>
+    //h関数追加
       <p class="text-right">合計金額: <?php print number_format($total_price); ?>円</p>
     <?php } else { ?>
       <p>カートに商品はありません。</p>

@@ -4,6 +4,7 @@
   <?php include VIEW_PATH . 'templates/head.php'; ?>
   
   <title>商品一覧</title>
+  //h関数追加
   <link rel="stylesheet" href="<?php print(STYLESHEET_PATH . 'index.css'); ?>">
 </head>
 <body>
@@ -20,6 +21,7 @@
         <div class="col-6 item">
           <div class="card h-100 text-center">
             <div class="card-header">
+
               <?php print h($item['name']); ?>
             </div>
             <figure class="card-body">
@@ -30,6 +32,7 @@
                   <form action="index_add_cart.php" method="post">
                     <input type="submit" value="カートに追加" class="btn btn-primary btn-block">
                     <input type="hidden" name="item_id" value="<?php print h($item['item_id']); ?>">
+
                   </form>
                 <?php } else { ?>
                   <p class="text-danger">現在売り切れです。</p>

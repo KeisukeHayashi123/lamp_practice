@@ -16,6 +16,7 @@ function get_db_connect(){
   return $dbh;
 }
 
+//該当する一部のデータを配列として返す
 function fetch_query($db, $sql, $params = array()){
   try{
     $statement = $db->prepare($sql);
@@ -27,6 +28,7 @@ function fetch_query($db, $sql, $params = array()){
   return false;
 }
 
+//該当する全てのデータを配列として返す
 function fetch_all_query($db, $sql, $params = array()){
   try{
     $statement = $db->prepare($sql);
@@ -38,6 +40,7 @@ function fetch_all_query($db, $sql, $params = array()){
   return false;
 }
 
+//dbへの要求を実行
 function execute_query($db, $sql, $params = array()){
   try{
     $statement = $db->prepare($sql);
