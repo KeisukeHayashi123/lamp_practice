@@ -8,37 +8,27 @@ require_once MODEL_PATH . 'db.php';
 function get_user_carts($db, $user_id){
   $sql = "
     SELECT
-    //itemsテーブルからのデータの取得 商品id
       items.item_id,
-    //itemsテーブルからのデータの取得 商品名
       items.name,
-    //itemsテーブルからのデータの取得　商品価格  
       items.price,
-    //itemsテーブルからのデータの取得 商品の数量  
       items.stock,
-    //itemsテーブルからのデータの取得 商品ステータス 
       items.status,
-    //itemsテーブルからのデータの取得 商品画像  
       items.image,
-    // cartsテーブルからのデータの取得 カートid 
       carts.cart_id,
-    // cartsテーブルからのデータの取得 ユーザーid 
       carts.user_id,
-    // cartsテーブルからのデータの取得　カート中の数量  
       carts.amount
-    //cartsテーブルと商品テーブルの各商品idの紐づけ  
     FROM
       carts
     JOIN
       items
     ON
       carts.item_id = items.item_id
-    //条件　cartsのユーザーidがuser_idと一致している時のみ
     WHERE
       carts.user_id = {$user_id}
+      //carts.user_id = ?
   ";
-  //
   return fetch_all_query($db, $sql);
+  // return fetch_all_query($db, $sql,array($user_id));
 }
 //カートに追加するために必要なデータ
 function get_user_cart($db, $user_id, $item_id){
@@ -61,10 +51,13 @@ function get_user_cart($db, $user_id, $item_id){
       carts.item_id = items.item_id
     WHERE
       carts.user_id = {$user_id}  
+      //carts.user_id = ?
     AND
       items.item_id = {$item_id}
+      //items.item_id = ?
   ";
   return fetch_query($db, $sql);
+  // return fetch_query($db, $sql,array($user_id,$item=id));
 
 }
 
@@ -77,7 +70,7 @@ function add_cart($db, $user_id, $item_id ) {
   return update_cart_amount($db, $cart['cart_id'], $cart['amount'] + 1);
 }
 
-//わかんない　上との違い　データ新規作成？数量1個
+//上との違い　データ新規作成？数量1個
 function insert_cart($db, $user_id, $item_id, $amount = 1){
   $sql = "
     INSERT INTO
@@ -88,8 +81,11 @@ function insert_cart($db, $user_id, $item_id, $amount = 1){
       )
     VALUES({$item_id}, {$user_id}, {$amount})
   ";
+  //VALUES違う
+  //VALUES(?,?,?);
 
   return execute_query($db, $sql);
+  // return execute_query($db, $sql,array($item_id,$user_id,$amount));
 }
 
 //カート画面での数量変更　LIMIT句(一つの商品ごと?)
@@ -99,11 +95,15 @@ function update_cart_amount($db, $cart_id, $amount){
       carts
     SET
       amount = {$amount}
+      //ここ違う
+      //amount = ?
     WHERE
       cart_id = {$cart_id}
+      //ここも　cart_id = ?
     LIMIT 1
   ";
   return execute_query($db, $sql);
+  // return execute_query($db, $sql,array($amount,$cart_id));
 }
 
 //カート画面での商品削除(一つの商品ごと?)
@@ -113,10 +113,12 @@ function delete_cart($db, $cart_id){
       carts
     WHERE
       cart_id = {$cart_id}
+      //cart_id = ?
     LIMIT 1
   ";
 
   return execute_query($db, $sql);
+  //return execute_query($db, $sql,array($cart_id));
 }
 
 //購入処理
@@ -145,9 +147,11 @@ function delete_user_carts($db, $user_id){
       carts
     WHERE
       user_id = {$user_id}
+      //user_id = ?
   ";
 
   execute_query($db, $sql);
+  //execute_query($db, $sql,array($user_id));
 }
 
 //商品の合計金額
