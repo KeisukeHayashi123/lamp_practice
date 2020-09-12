@@ -5,8 +5,8 @@
   //VIEWファイルの読み込み テンプレートのヘッド画面表示
   <?php include VIEW_PATH . 'templates/head.php'; ?>
   <title>商品管理</title>
-  //STYLESHEETのadmin.cssを採用　h関数追加
-  <link rel="stylesheet" href="<?php print p(STYLESHEET_PATH . 'admin.css'); ?>">
+  //STYLESHEETのadmin.cssを採用　h関数追加が必要
+  <link rel="stylesheet" href="<?php print (STYLESHEET_PATH . 'admin.css'); ?>">
 </head>
 <body>
   //VIEWファイルの読み込み　テンプレートのログインされた後の画面ページを表示
@@ -65,22 +65,22 @@
         </thead>
         <tbody>
           <?php foreach($items as $item){ ?>
-          //h関数追加
+          //h関数追加が必要
           <tr class="<?php print h(is_open($item) ? '' : 'close_item'); ?>">
             <td><img src="<?php print h(IMAGE_PATH . $item['image']);?>" class="item_image"></td>
-            <td><?php print h($item['name']); ?></td>
-            <td><?php print h(number_format($item['price'])); ?>円</td>
+            <td><?php print ($item['name']); ?></td>
+            <td><?php print (number_format($item['price'])); ?>円</td>
             <td>
               <form method="post" action="admin_change_stock.php">
                 <div class="form-group">
                   <!-- sqlインジェクション確認のためあえてtext -->
-                  //h関数追加
-                  <input  type="text" name="stock" value="<?php print h($item['stock']); ?>">
+                  //h関数追加が必要
+                  <input  type="text" name="stock" value="<?php print ($item['stock']); ?>">
                   個
                 </div>
                 <input type="submit" value="変更" class="btn btn-secondary">
-                //h関数追加
-                <input type="hidden" name="item_id" value="<?php print h($item['item_id']); ?>">
+                //h関数追加が必要
+                <input type="hidden" name="item_id" value="<?php print ($item['item_id']); ?>">
               </form>
             </td>
             <td>
@@ -93,11 +93,13 @@
                   <input type="submit" value="非公開 → 公開" class="btn btn-secondary">
                   <input type="hidden" name="changes_to" value="open">
                 <?php } ?>
-                <input type="hidden" name="item_id" value="<?php print h($item['item_id']); ?>">
+                //h関数追加
+                <input type="hidden" name="item_id" value="<?php print ($item['item_id']); ?>">
               </form>
 
               <form method="post" action="admin_delete_item.php">
                 <input type="submit" value="削除" class="btn btn-danger delete">
+                //h関数追加
                 <input type="hidden" name="item_id" value="<?php print h($item['item_id']); ?>">
               </form>
 
