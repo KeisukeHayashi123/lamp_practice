@@ -28,30 +28,26 @@
         <tbody>
           <?php foreach($carts as $cart){ ?>
           <tr>
-            //h関数追加
-            <td><img src="<?php print(IMAGE_PATH . $cart['image']);?>" class="item_image"></td>
-            //h関数追加
-            <td><?php print($cart['name']); ?></td>
-            //h関数追加
-            <td><?php print(number_format($cart['price'])); ?>円</td>
+
+            <td><img src="<?php print h(IMAGE_PATH . $cart['image']);?>" class="item_image"></td>
+            <td><?php print h($cart['name']); ?></td>
+            <td><?php print h(number_format($cart['price'])); ?>円</td>
             <td>
               <form method="post" action="cart_change_amount.php">
-                //h関数追加
-                <input type="number" name="amount" value="<?php print($cart['amount']); ?>">
+                <input type="number" name="amount" value="<?php print h($cart['amount']); ?>">
                 個
                 <input type="submit" value="変更" class="btn btn-secondary">
-                //h関数追加
-                <input type="hidden" name="cart_id" value="<?php print($cart['cart_id']); ?>">
+                <input type="hidden" name="cart_id" value="<?php print h($cart['cart_id']); ?>">
               </form>
             </td>
-            //h関数追加
-            <td><?php print(number_format($cart['price'] * $cart['amount'])); ?>円</td>
+            <td><?php print h(number_format($cart['price'] * $cart['amount'])); ?>円</td>
+
             <td>
 
               <form method="post" action="cart_delete_cart.php">
                 <input type="submit" value="削除" class="btn btn-danger delete">
-                //h関数追加
-                <input type="hidden" name="cart_id" value="<?php print($cart['cart_id']); ?>">
+                <input type="hidden" name="cart_id" value="<?php print h($cart['cart_id']); ?>">
+
               </form>
 
             </td>

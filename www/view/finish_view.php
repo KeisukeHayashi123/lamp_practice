@@ -27,18 +27,15 @@
         <tbody>
           <?php foreach($carts as $cart){ ?>
           <tr>
-            //h関数追加
-            <td><img src="<?php print(IMAGE_PATH . $cart['image']);?>" class="item_image"></td>
-            //h関数追加
-            <td><?php print($cart['name']); ?></td>
-            //h関数追加
-            <td><?php print(number_format($cart['price'])); ?>円</td>
+
+            <td><img src="<?php print h(IMAGE_PATH . $cart['image']);?>" class="item_image"></td>
+            <td><?php print h($cart['name']); ?></td>
+            <td><?php print h(number_format($cart['price'])); ?>円</td>
             <td>
-              //h関数追加
-                <?php print($cart['amount']); ?>個
+                <?php print h($cart['amount']); ?>個
             </td>
-            //h関数追加
-            <td><?php print(number_format($cart['price'] * $cart['amount'])); ?>円</td>
+            <td><?php print h(number_format($cart['price'] * $cart['amount'])); ?>円</td>
+
           </tr>
           <?php } ?>
         </tbody>

@@ -134,6 +134,11 @@ function is_valid_upload_image($image){
   }
   return true;
 }
+function h($key){
+  $str = htmlspecialchars($key,ENT_QUOTES,'UTF-8');
+  return $str;
+}
+
 
 //ここ追加
 //html内での特殊文字をエスケープするユーザー定義関数
