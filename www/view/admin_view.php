@@ -1,21 +1,17 @@
 <!DOCTYPE html>
-//商品管理ページ
 <html lang="ja">
 <head>
-  //VIEWファイルの読み込み テンプレートのヘッド画面表示
   <?php include VIEW_PATH . 'templates/head.php'; ?>
   <title>商品管理</title>
   <link rel="stylesheet" href="<?php print (STYLESHEET_PATH . 'admin.css'); ?>">
 </head>
 <body>
-  //VIEWファイルの読み込み　テンプレートのログインされた後の画面ページを表示
   <?php 
   include VIEW_PATH . 'templates/header_logined.php'; 
   ?>
 
   <div class="container">
     <h1>商品管理</h1>
-//VIEWファイルの読み込み ようこそ~さんのとこ　テンプレートのメッセージを表示
     <?php include VIEW_PATH . 'templates/messages.php'; ?>
 
     <form 

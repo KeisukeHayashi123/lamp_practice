@@ -3,7 +3,6 @@
 <head>
   <?php include VIEW_PATH . 'templates/head.php'; ?>
   <title>ログイン</title>
-  //h関数追加
   <link rel="stylesheet" href="<?php print(STYLESHEET_PATH . 'login.css'); ?>">
 </head>
 <body>
