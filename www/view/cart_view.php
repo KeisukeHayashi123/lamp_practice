@@ -3,6 +3,7 @@
 <head>
   <?php include VIEW_PATH . 'templates/head.php'; ?>
   <title>カート</title>
+  //h関数追加
   <link rel="stylesheet" href="<?php print(STYLESHEET_PATH . 'cart.css'); ?>">
 </head>
 <body>
@@ -27,22 +28,29 @@
         <tbody>
           <?php foreach($carts as $cart){ ?>
           <tr>
+            //h関数追加
             <td><img src="<?php print(IMAGE_PATH . $cart['image']);?>" class="item_image"></td>
+            //h関数追加
             <td><?php print($cart['name']); ?></td>
+            //h関数追加
             <td><?php print(number_format($cart['price'])); ?>円</td>
             <td>
               <form method="post" action="cart_change_amount.php">
+                //h関数追加
                 <input type="number" name="amount" value="<?php print($cart['amount']); ?>">
                 個
                 <input type="submit" value="変更" class="btn btn-secondary">
+                //h関数追加
                 <input type="hidden" name="cart_id" value="<?php print($cart['cart_id']); ?>">
               </form>
             </td>
+            //h関数追加
             <td><?php print(number_format($cart['price'] * $cart['amount'])); ?>円</td>
             <td>
 
               <form method="post" action="cart_delete_cart.php">
                 <input type="submit" value="削除" class="btn btn-danger delete">
+                //h関数追加
                 <input type="hidden" name="cart_id" value="<?php print($cart['cart_id']); ?>">
               </form>
 
@@ -51,6 +59,7 @@
           <?php } ?>
         </tbody>
       </table>
+    //h関数追加
       <p class="text-right">合計金額: <?php print number_format($total_price); ?>円</p>
       <form method="post" action="finish.php">
         <input class="btn btn-block btn-primary" type="submit" value="購入する">
