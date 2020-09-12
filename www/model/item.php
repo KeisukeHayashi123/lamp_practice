@@ -19,9 +19,11 @@ function get_item($db, $item_id){
       items
     WHERE
       item_id = {$item_id}
+      //item_id = ?
   ";
 
   return fetch_query($db, $sql);
+  //return fetch_query($db, $sql,array($item_id));
 }
 //itemsテーブルから非公開公開の商品を取得
 function get_items($db, $is_open = false){
@@ -87,8 +89,10 @@ function insert_item($db, $name, $price, $stock, $filename, $status){
       )
     VALUES('{$name}', {$price}, {$stock}, '{$filename}', {$status_value});
   ";
+  //VALUES(?,?,?,?,?);
 
   return execute_query($db, $sql);
+  //return execute_query($db, $sql,array($name,$price,$stock,$filename,$status_value));
 }
 //商品の公開非公開の更新関数
 function update_item_status($db, $item_id, $status){
@@ -97,12 +101,15 @@ function update_item_status($db, $item_id, $status){
       items
     SET
       status = {$status}
+      //status = ?
     WHERE
       item_id = {$item_id}
+      //item_id = ?
     LIMIT 1
   ";
   
   return execute_query($db, $sql);
+  //return execute_query($db, $sql,array($status,$item_id));
 }
 //商品の数量更新関数
 function update_item_stock($db, $item_id, $stock){
@@ -111,14 +118,17 @@ function update_item_stock($db, $item_id, $stock){
       items
     SET
       stock = {$stock}
+      //stock = ?
     WHERE
       item_id = {$item_id}
+      //item_id = ?
     LIMIT 1
   ";
   
   return execute_query($db, $sql);
+  //return execute_query($db, $sql,array($stock,$item_id));
 }
-//商品破壊? 何がしたい関数かわかんない
+//商品削除関数
 function destroy_item($db, $item_id){
   //変数$itemに商品データを取得し格納
   $item = get_item($db, $item_id);
@@ -129,14 +139,14 @@ function destroy_item($db, $item_id){
   }
   //トランザクション開始
   $db->beginTransaction();
-  //もし削除する商品と画像が変数$itemの中に格納されているなら??　わからん
+  //商品削除と画像削除が合致していれば
   if(delete_item($db, $item['item_id'])
     && delete_image($item['image'])){
-    //コミットする
+    //コミット・削除実行する
     $db->commit();
     return true;
   }
-  //違ったらロールバックする
+  //違ったらロールバックする・どちらかが違えば戻る
   $db->rollback();
   return false;
 }
@@ -147,10 +157,12 @@ function delete_item($db, $item_id){
       items
     WHERE
       item_id = {$item_id}
+      //item_id = ?
     LIMIT 1
   ";
   
   return execute_query($db, $sql);
+  //return execute_query($db, $sql,array($item_id));
 }
 
 
