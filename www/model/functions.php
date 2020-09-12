@@ -37,7 +37,7 @@ function get_session($name){
   };
   return '';
 }
-//何がしたいかわからない　$valueに格納?
+//ユーザー定義関数
 function set_session($name, $value){
   $_SESSION[$name] = $value;
 }
@@ -116,7 +116,7 @@ function is_alphanumeric($string){
 function is_positive_integer($string){
   return is_valid_format($string, REGEXP_POSITIVE_INTEGER);
 }
-//うまく表現できない　要はちゃんとわかってない
+//
 function is_valid_format($string, $format){
   return preg_match($format, $string) === 1;
 }
@@ -137,7 +137,7 @@ function is_valid_upload_image($image){
 
 //ここ追加
 //html内での特殊文字をエスケープするユーザー定義関数
-function h ($string) {
-  return htmlspecialchars($string, ENT_QUOTES, 'utf-8');
-}
+//function h ($string) {
+//return htmlspecialchars($string, ENT_QUOTES, 'utf-8');
+//}
 
