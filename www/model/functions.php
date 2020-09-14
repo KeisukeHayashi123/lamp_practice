@@ -140,9 +140,3 @@ function h($key){
 }
 
 
-//ここ追加
-//html内での特殊文字をエスケープするユーザー定義関数
-//function h ($string) {
-//return htmlspecialchars($string, ENT_QUOTES, 'utf-8');
-//}
-
