@@ -1,23 +1,16 @@
 <!DOCTYPE html>
-//商品管理ページ
 <html lang="ja">
 <head>
-  //VIEWファイルの読み込み テンプレートのヘッド画面表示
   <?php include VIEW_PATH . 'templates/head.php'; ?>
   <title>商品管理</title>
   <link rel="stylesheet" href="<?php print (STYLESHEET_PATH . 'admin.css'); ?>">
 </head>
 <body>
-  //VIEWファイルの読み込み　テンプレートのログインされた後の画面ページを表示
   <?php 
-  include VIEW_PATH . 'templates/header_logined.php'; 
-  ?>
-
+  include VIEW_PATH . 'templates/header_logined.php'; ?>
   <div class="container">
     <h1>商品管理</h1>
-//VIEWファイルの読み込み ようこそ~さんのとこ　テンプレートのメッセージを表示
     <?php include VIEW_PATH . 'templates/messages.php'; ?>
-
     <form 
       method="post" 
       action="admin_insert_item.php" 
@@ -45,8 +38,7 @@
           <option value="open">公開</option>
           <option value="close">非公開</option>
         </select>
-      </div>
-      
+      </div> 
       <input type="submit" value="商品追加" class="btn btn-primary">
     </form>
 
@@ -68,7 +60,6 @@
             <td><img src="<?php print h(IMAGE_PATH . $item['image']);?>" class="item_image"></td>
             <td><?php print h($item['name']); ?></td>
             <td><?php print h(number_format($item['price'])); ?>円</td>
-
             <td>
               <form method="post" action="admin_change_stock.php">
                 <div class="form-group">
@@ -78,11 +69,9 @@
                 </div>
                 <input type="submit" value="変更" class="btn btn-secondary">
                 <input type="hidden" name="item_id" value="<?php print h($item['item_id']); ?>">
-
               </form>
             </td>
             <td>
-
               <form method="post" action="admin_change_status.php" class="operation">
                 <?php if(is_open($item) === true){ ?>
                   <input type="submit" value="公開 → 非公開" class="btn btn-secondary">
@@ -91,17 +80,12 @@
                   <input type="submit" value="非公開 → 公開" class="btn btn-secondary">
                   <input type="hidden" name="changes_to" value="open">
                 <?php } ?>
-
                 <input type="hidden" name="item_id" value="<?php print h($item['item_id']); ?>">
-
               </form>
-
               <form method="post" action="admin_delete_item.php">
                 <input type="submit" value="削除" class="btn btn-danger delete">
-
                 <input type="hidden" name="item_id" value="<?php print h($item['item_id']); ?>">
               </form>
-
             </td>
           </tr>
           <?php } ?>
