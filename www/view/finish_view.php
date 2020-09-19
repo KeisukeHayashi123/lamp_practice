@@ -3,6 +3,7 @@
 <head>
   <?php include VIEW_PATH . 'templates/head.php'; ?>
   <title>ご購入ありがとうございました！</title>
+
   <link rel="stylesheet" href="<?php print(STYLESHEET_PATH . 'admin.css'); ?>">
 </head>
 <body>
@@ -35,6 +36,7 @@
           <?php } ?>
         </tbody>
       </table>
+
       <p class="text-right">合計金額: <?php print number_format($total_price); ?>円</p>
     <?php } else { ?>
       <p>カートに商品はありません。</p>

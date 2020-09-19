@@ -47,11 +47,16 @@ function get_user_cart($db, $user_id, $item_id){
       items
     ON
       carts.item_id = items.item_id
-    WHERE  
+
+    WHERE
+     
       carts.user_id = ?
     AND
+      
       items.item_id = ?
   ";
+ 
+
    return fetch_query($db, $sql,array($user_id,$item_id));
 
 }
@@ -74,8 +79,11 @@ function insert_cart($db, $user_id, $item_id, $amount = 1){
         user_id,
         amount
       )
-    VALUES(?,?,?);
+
+      VALUES(?,?,?)
   ";
+  
+
 
   
    return execute_query($db, $sql,array($item_id,$user_id,$amount));
@@ -91,11 +99,13 @@ function update_cart_amount($db, $cart_id, $amount){
       
     WHERE
       cart_id = ?
-      
+
+     
     LIMIT 1
   ";
+ 
+   return execute_query($db, $sql,array($amount,$cart_id));
 
-  return execute_query($db, $sql,array($amount,$cart_id));
 }
 
 //カート画面での商品削除(一つの商品ごと?)
@@ -105,10 +115,12 @@ function delete_cart($db, $cart_id){
       carts
     WHERE
       cart_id = ?
-      
+
+     
     LIMIT 1
   ";
 
+  
 
   return execute_query($db, $sql,array($cart_id));
 }
@@ -139,7 +151,11 @@ function delete_user_carts($db, $user_id){
       carts
     WHERE
       user_id = ?
+
+     
   ";
+
+  
 
   execute_query($db, $sql,array($user_id));
 }

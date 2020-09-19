@@ -19,8 +19,13 @@ function get_item($db, $item_id){
       items
     WHERE
       item_id = ?
+
+  
   ";
+
   return fetch_query($db, $sql,array($item_id));
+  //return fetch_query($db, $sql,array($item_id));
+
 }
 //itemsテーブルから非公開公開の商品を取得
 function get_items($db, $is_open = false){
@@ -84,8 +89,11 @@ function insert_item($db, $name, $price, $stock, $filename, $status){
         image,
         status
       )
-    VALUES(?,?,?,?,?);
+
+      VALUES(?,?,?,?,?)
   ";
+ 
+
   
 
   return execute_query($db, $sql,array($name,$price,$stock,$filename,$status_value));
@@ -96,12 +104,17 @@ function update_item_status($db, $item_id, $status){
     UPDATE
       items
     SET
+
+      
       status = ?
     WHERE
+      
+
       item_id = ?
     LIMIT 1
   ";
   
+
   return execute_query($db, $sql,array($status,$item_id));
 }
 //商品の数量更新関数
@@ -110,12 +123,17 @@ function update_item_stock($db, $item_id, $stock){
     UPDATE
       items
     SET
+
+      
       stock = ?
     WHERE
+     
+
       item_id = ?
     LIMIT 1
   ";
   
+
   return execute_query($db, $sql,array($stock,$item_id));
 }
 //商品削除関数
@@ -146,9 +164,13 @@ function delete_item($db, $item_id){
     DELETE FROM
       items
     WHERE
+
+     
       item_id = ?
     LIMIT 1
   ";
+  
+  
 
   return execute_query($db, $sql,array($item_id));
 }

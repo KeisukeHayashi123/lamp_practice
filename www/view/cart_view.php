@@ -3,6 +3,7 @@
 <head>
   <?php include VIEW_PATH . 'templates/head.php'; ?>
   <title>カート</title>
+
   <link rel="stylesheet" href="<?php print(STYLESHEET_PATH . 'cart.css'); ?>">
 </head>
 <body>
@@ -49,6 +50,7 @@
           <?php } ?>
         </tbody>
       </table>
+
       <p class="text-right">合計金額: <?php print number_format($total_price); ?>円</p>
       <form method="post" action="finish.php">
         <input class="btn btn-block btn-primary" type="submit" value="購入する">
