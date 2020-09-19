@@ -13,16 +13,22 @@ $name = get_post('name');
 $password = get_post('password');
 
 $db = get_db_connect();
+//csrf
+$token = get_post('token');
 
 
-$user = login_as($db, $name, $password);
-if( $user === false){
-  set_error('ログインに失敗しました。');
-  redirect_to(LOGIN_URL);
+if(is_valid_csrf_token($token) === true){
+  $user = login_as($db, $name, $password);
+  if( $user === false){
+    set_error('ログインに失敗しました。');
+    redirect_to(LOGIN_URL);
+  }
+  
+  set_message('ログインしました。');
+  if ($user['type'] === USER_TYPE_ADMIN){
+    redirect_to(ADMIN_URL);
+  }
+  redirect_to(HOME_URL);
+}else{
+  set_error('不正なリクエストです。');
 }
-
-set_message('ログインしました。');
-if ($user['type'] === USER_TYPE_ADMIN){
-  redirect_to(ADMIN_URL);
-}
-redirect_to(HOME_URL);
