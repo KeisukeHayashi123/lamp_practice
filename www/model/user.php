@@ -15,12 +15,12 @@ function get_user($db, $user_id){
       users
     WHERE
       user_id = ?
-    
+
     LIMIT 1
   ";
 
   return fetch_query($db, $sql,array($user_id));
-  //return fetch_query($db, $sql,array($user_id));
+
 }
 //ユーザーの取得(名前)
 function get_user_by_name($db, $name){
@@ -39,6 +39,7 @@ function get_user_by_name($db, $name){
 
   return fetch_query($db, $sql,array($name));
   // return fetch_query($db, $sql,array($name));
+
 }
 //?? 既にログインしたことあるユーザーかの確認?
 function login_as($db, $name, $password){
@@ -112,11 +113,13 @@ function insert_user($db, $name, $password){
   $sql = "
     INSERT INTO
       users(name, password)
+
     VALUES (?,?);
   ";
   
 
   return execute_query($db, $sql,array($name,$password));
   
+
 }
 

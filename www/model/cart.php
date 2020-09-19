@@ -26,7 +26,6 @@ function get_user_carts($db, $user_id){
     WHERE
       carts.user_id = ?
   ";
-  
    return fetch_all_query($db, $sql,array($user_id));
 }
 //カートに追加するために必要なデータ
@@ -48,6 +47,7 @@ function get_user_cart($db, $user_id, $item_id){
       items
     ON
       carts.item_id = items.item_id
+
     WHERE
      
       carts.user_id = ?
@@ -56,6 +56,7 @@ function get_user_cart($db, $user_id, $item_id){
       items.item_id = ?
   ";
  
+
    return fetch_query($db, $sql,array($user_id,$item_id));
 
 }
@@ -69,7 +70,7 @@ function add_cart($db, $user_id, $item_id ) {
   return update_cart_amount($db, $cart['cart_id'], $cart['amount'] + 1);
 }
 
-//上との違い　データ新規作成？数量1個
+//上との違い　データ新規作成数量1個
 function insert_cart($db, $user_id, $item_id, $amount = 1){
   $sql = "
     INSERT INTO
@@ -78,9 +79,11 @@ function insert_cart($db, $user_id, $item_id, $amount = 1){
         user_id,
         amount
       )
+
       VALUES(?,?,?)
   ";
   
+
 
   
    return execute_query($db, $sql,array($item_id,$user_id,$amount));
@@ -96,11 +99,13 @@ function update_cart_amount($db, $cart_id, $amount){
       
     WHERE
       cart_id = ?
+
      
     LIMIT 1
   ";
  
    return execute_query($db, $sql,array($amount,$cart_id));
+
 }
 
 //カート画面での商品削除(一つの商品ごと?)
@@ -110,11 +115,13 @@ function delete_cart($db, $cart_id){
       carts
     WHERE
       cart_id = ?
+
      
     LIMIT 1
   ";
 
   
+
   return execute_query($db, $sql,array($cart_id));
 }
 
@@ -144,6 +151,7 @@ function delete_user_carts($db, $user_id){
       carts
     WHERE
       user_id = ?
+
      
   ";
 
