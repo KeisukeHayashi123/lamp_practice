@@ -52,7 +52,7 @@ function get_user_cart($db, $user_id, $item_id){
     AND
       items.item_id = ?
   ";
-   return fetch_query($db, $sql,array($user_id,$item=id));
+   return fetch_query($db, $sql,array($user_id,$item_id));
 
 }
 
@@ -65,7 +65,7 @@ function add_cart($db, $user_id, $item_id ) {
   return update_cart_amount($db, $cart['cart_id'], $cart['amount'] + 1);
 }
 
-//上との違い　データ新規作成？数量1個
+//上との違い　データ新規作成数量1個
 function insert_cart($db, $user_id, $item_id, $amount = 1){
   $sql = "
     INSERT INTO
