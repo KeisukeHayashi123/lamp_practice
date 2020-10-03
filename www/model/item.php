@@ -238,3 +238,16 @@ function is_valid_item_status($status){
   }
   return $is_valid;
 }
+
+function get_ranking($link){
+$sql = '
+SELECT items.item_id,SUM(amount),name,image,items.price
+FROM items
+JOIN purchase_detail
+ON items.item_id = purchase_detail.item_id
+GROUP BY purchase_detail.item_id
+ORDER BY SUM(amount) DESC
+LIMIT 3
+';
+return fetch_all_query($link,$sql);
+}
