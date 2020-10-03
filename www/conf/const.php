@@ -4,7 +4,7 @@
 define('MODEL_PATH', $_SERVER['DOCUMENT_ROOT'] . '/../model/');
 define('VIEW_PATH', $_SERVER['DOCUMENT_ROOT'] . '/../view/');
 
-//わかんない
+
 define('IMAGE_PATH', '/assets/images/');
 define('STYLESHEET_PATH', '/assets/css/');
 define('IMAGE_DIR', $_SERVER['DOCUMENT_ROOT'] . '/assets/images/' );
@@ -24,6 +24,8 @@ define('HOME_URL', '/index.php');
 define('CART_URL', '/cart.php');
 define('FINISH_URL', '/finish.php');
 define('ADMIN_URL', '/admin.php');
+define('HISTORY_URL', '/history.php');
+define('DETAIL_URL', '/detail.php');
 
 //アルファベット大文字小文字数字のバリデーション
 define('REGEXP_ALPHANUMERIC', '/\A[0-9a-zA-Z]+\z/');

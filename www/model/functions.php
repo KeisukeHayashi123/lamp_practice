@@ -56,6 +56,7 @@ function get_errors(){
   return $errors;
 }
 
+//エラーがあるかないかを確認する
 function has_error(){
   return isset($_SESSION['__errors']) && count($_SESSION['__errors']) !== 0;
 }
@@ -158,3 +159,13 @@ function is_valid_csrf_token($token){
   return $token === get_session('csrf_token');
 }
 
+//ユーザー定義関数 
+function sum_histories($total){
+  $order = 0;
+  if(is_array($total)){
+    foreach($total as $subtotal){
+      $order = $order + $subtotal;
+    }
+  }
+  return $order;
+}
