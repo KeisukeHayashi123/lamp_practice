@@ -8,7 +8,7 @@ CREATE TABLE history(
 
 CREATE TABLE purchase_detail(
   purchase_detail_id int AUTO_INCREMENT NOT NULL,
-  
+  history_id int NOT NULL,
   item_id int NOT NULL,
   amount int NOT NULL,
   price int NOT NULL,
